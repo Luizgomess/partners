@@ -1,0 +1,25 @@
+<div class="modal-backdrop" (click)="closeModal()"></div>
+<main class="modal-content">
+  <h2>{{ action === 'edit' ? 'Edit Company' : 'Create Company' }}</h2>
+<form [formGroup]="partnerForm" (ngSubmit)="onSubmit()">
+  <h1 *ngIf="submit$ | async"></h1>
+  <div>
+    <label for="companyName">Name:</label>
+    <input id="companyName" formControlName="name" type="text" />
+  </div>
+  <div>
+    <label for="companyName">Description:</label>
+    <input id="companyName" formControlName="description" type="text" />
+  </div>
+  <div>
+    <label for="companyName">Repo:</label>
+    <input id="companyName" formControlName="repositoryGit" type="text" />
+  </div>
+  <div>
+    <label for="companyName">urlDoc:</label>
+    <input id="companyName" formControlName="urlDoc" type="text" />
+  </div>
+
+  <button type="submit">{{ action === 'edit' ? 'Save Changes' : 'Create Company' }}</button>
+</form>
+</main>

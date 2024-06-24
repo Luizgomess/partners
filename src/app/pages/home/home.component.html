@@ -1,0 +1,37 @@
+<main class="root">
+  <section class="content" style="display: flex; flex-direction: column; justify-content: center;">
+    <header class="heading">
+      <h1>Bem vindo!</h1>
+      <h2>Você está na tela de partners</h2>
+      <p>Aqui você consegue gerênciar os parceiros da sua conta</p>
+    </header>
+    <main class="table">
+      <header class="table-heading">
+        <header>
+          <h1>Partners</h1>
+          <button (click)="openChangeModal('create')"><i class="ph ph-plus"></i> Novo Parceiro</button>
+        </header>
+        <section class="filters">
+            <input [(ngModel)]="partnerId" id="partnerId" (input)="onInputChange(partnerId)" placeholder="Digite um nome" finInput>
+          <button (click)="search()">Search</button>
+        </section>
+      </header>
+      <main class="table-content" *ngIf="(partners$ | async) as partners">
+        <div *ngFor="let partner of partners | slice: (currentPage-1) * pageSize : currentPage * pageSize" finCell>
+          <main>
+            <p>{{ partner.id }}</p>
+            <p>{{ partner.name }}</p>
+            <p>{{ partner.repositoryGit }}</p>
+          </main>
+          <footer>
+            <button (click)="openChangeModal('edit', partner)">editar</button>
+            <button (click)="openExampleModal(partner.id)">deletar</button>
+          </footer>
+        </div>
+      </main>
+      <footer class="table-footer">
+        <pagination [(currentPage)]="currentPage" [total]="total" (changePage)="changePage()"></pagination>
+      </footer>
+    </main>
+  </section>
+</main>
